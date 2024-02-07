@@ -1,0 +1,92 @@
+curl -fsSL https://pkg.jenkins.io/debian./jenkins.io.key | sudo tee \ 
+/usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+https://pkg.jenkins.io/debian binary/ | sudo tee \   /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+jenkins.io/docs/book/installing/linux#debianubutu
+
+
+edba827f33c7427f85d2f5c3029bf433
+http://44.202.251.195:8080/
+
+INSTALLATION OF POSTGRESQL
+ON AWS EC2 & PGADMIN CLIENT
+
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql-15
+
+https://www.youtube.com/watch?v=3fHPGT9t_Hw
+https://www.youtube.com/watch?v=ygmOFUH37fg&t=1221s
+
+https://github.com/Aseemakram19/website-ci-cd-pipline
+https://www.youtube.com/watch?v=01BlrWPkfgY&t=715s
+https://medium.com/@mohdaseemakram19/installation-of-postgresql-on-ec2-pgadmin-client-36186c9123ae
+
+
+postgresql.org/download/linux/ubuntu/
+
+
+CREATE TABLE Companies (
+    id INT,
+    name VARCHAR(50),
+    address TEXT,
+    email VARCHAR(50),
+    phone VARCHAR(10)
+);
+
+INSERT INTO Companies (id, name, address, email, phone)
+VALUES
+    (1, 'ABC Corporation', '123 Main St, Cityville', 'abc@example.com', '1234567890'),
+    (2, 'XYZ Ltd.', '456 Elm Ave, Townsville', 'xyz@example.com', '9876543210'),
+    (3, 'PQR Enterprises', '789 Oak Rd, Villageton', 'pqr@example.com', '5551234567');
+
+
+CREATE TABLE todo(
+  todo_id SERIAL PRIMARY KEY,
+  description VARCHAR(255)
+);
+
+INSERT INTO todo (description)
+VALUES
+    ('Complete project report'),
+    ('Buy groceries'),
+    ('Call mom'),
+    ('Attend team meeting');
+
+select * from todo;
+http://52.66.252.96:8080/
+
+
+#DOCKERFILE
+# # Use an official Node.js runtime as a parent image
+# FROM node:14
+
+# # Set the working directory to /app
+# WORKDIR /app
+
+# # Copy package.json and package-lock.json to the working directory
+# COPY package*.json ./
+
+# # Install any needed packages specified in package.json
+# RUN npm install
+
+# # Copy the current directory contents into the container at /app
+# COPY . .
+
+# # Make port 3000 available to the world outside this container
+# # EXPOSE 3000
+
+# # Run app.js when the container launches
+# CMD ["npm", "start"]
+FROM node:14-alpine
+RUN mkdir /app
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . ./
+CMD ["npm", "run", "start"]
